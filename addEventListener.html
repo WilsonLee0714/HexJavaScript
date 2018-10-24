@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>addEventListener</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #000;
+        }
+    </style>
+</head>
+
+<body class="body">
+    <div class="box">
+
+    </div>
+    <script>
+        var el = document.querySelector('.box');
+        el.addEventListener('click', function (evt) {
+            evt.stopPropagation();
+            alert('box');
+            console.log('box');
+        }, false);
+
+        var elbody = document.querySelector('.body');
+        elbody.addEventListener('click', function () {
+            alert('body');
+            console.log('你沒有點到box')
+        }, false);
+        // false (事件氣泡 - Event Bubbling) - 從指定元素往外找
+        // true (事件捕捉 - Event Capturing) = 從最外層找到指定元素
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>preventDefault</title>
+    <style>
+    .link{
+        margin-top: 50px;
+        display: block;
+    }
+    </style>
+</head>
+<body>
+    <a href="http://www.google.com" class="link">
+    123
+    </a>
+    <script>
+    var el = document.querySelector('.link');
+    el.addEventListener('click',function(evt){
+        evt.preventDefault();
+        evt.stopPropagation();
+        console.log('test')
+    });
+    </script>
+</body>
+</html>
