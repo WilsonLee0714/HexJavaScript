@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SetItem GetItem</title>
+</head>
+<body>
+    <h1>請輸入你的姓名</h1>
+    <input type="text" id="name">
+    <input type="button" id="setName" value="點擊儲存姓名">
+    <br>
+    <input type="button" id="getName" value="點擊呼叫姓名">
+    <script>
+    var setName = document.querySelector('#setName'),
+        getName = document.querySelector('#getName');
+
+    setName.addEventListener('click',() => {
+        let name = document.querySelector('#name').value;
+        localStorage.setItem('myName',name);
+    })
+    getName.addEventListener('click',() => {
+        let name = localStorage.getItem('myName');
+        alert(`你的名字叫做${name}`);
+    })
+
+    </script>
+</body>
+</html>
