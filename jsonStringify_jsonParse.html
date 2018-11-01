@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Json</title>
+</head>
+<body>
+    <ul style="padding:50px;background:#000;color:#fff" class="list"></ul>
+     
+    <script>
+        // 1.將 array 轉為 string 
+        //JSON.stringify()
+
+        // 2.將 string 轉為 array
+        //學以上兩點是因為 localStorage 只會保存 string 資料
+        //JSON.parse( )
+
+        var country = [
+            { farmer: '卡斯伯' }
+        ];
+        var countryString = JSON.stringify(country);
+        console.log(countryString);
+        localStorage.setItem('countryItem', countryString);
+
+        var getData = localStorage.getItem('countryItem');
+        var getDataAry = JSON.parse(getData);
+
+        console.log(getDataAry[0].farmer);
+    </script>
+</body>
+</html>

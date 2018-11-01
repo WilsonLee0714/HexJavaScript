@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>農場備忘錄</title>
+  <style>
+    html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+html {
+  background:url('https://firebasestorage.googleapis.com/v0/b/hexschool-api.appspot.com/o/web%2Fdemo%2Fjavascript%2Fphoto-1469122312224-c5846569feb1.jpeg?alt=media&token=7ff9d611-d759-4349-91c7-d1dc9a03692d') center no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+.wrap{
+  width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  margin:  100px auto;
+  padding: 1em;
+  text-align: center;
+}
+
+.img{
+  float: left;
+  width: 200px;
+}
+.content{
+  float: right;
+  width: 350px;
+  text-align: left;
+}
+.clearfix{
+  overflow: auto;
+  zoom: 1;
+}
+
+.list {
+  margin: 0;
+  padding: 50px 100px 100px 0;
+  text-align: left;
+  list-style: none;
+}
+
+.list li {
+  border-bottom: 1px solid gray;
+  padding: 10px 0;
+}
+  
+.addList {
+  margin-top: 20px;
+}
+  
+.addList .text {
+  padding:10px;
+  border: 2px solid rgb(73, 41, 10);
+}
+.addList .send {
+  padding: 10px;
+  cursor: pointer;
+  background: #e8a874;
+}
+</style>
+
+</head>
+
+<body>
+  <div class="wrap clearfix">
+    <div class="img">
+      <img class="logo" src="img/logo.svg">
+    </div>
+    <div class="content">
+      <div class="addList">
+        <input type="text" class="text" placeholder="請填寫代辦內容" required>
+        <input type="button" class="send" value="加入代辦">
+      </div>
+      <ul class="list"></ul>
+
+    </div>
+  </div>
+  <script>
+    // 指定 dom
+    var list = document.querySelector('.list');
+    var sendData = document.querySelector('.send');
+    var data = JSON.parse(localStorage.getItem('listData')) || [];
+
+    // 監聽與更新
+    sendData.addEventListener('click', addData);
+    list.addEventListener('click', toggleDone);
+    updateList(data);
+
+    //加入列表，並同步更新網頁與 localstorage
+    function addData(e) {
+      e.preventDefault();
+      var txt = document.querySelector('.text').value;
+      var todo = {
+        content: txt
+      };
+      data.push(todo);
+      updateList(data);
+      localStorage.setItem('listData', JSON.stringify(data));
+    }
+    // 更新網頁內容
+    function updateList(items) {
+      str = '';
+      var len = items.length;
+      for (var i = 0; i < len; i++) {
+        str += `<li><a href="#" data-index=${i}>刪除</a> <span>${items[i].content}</span></li>`;
+      }
+      list.innerHTML = str;
+    }
+    // 刪除代辦事項
+    function toggleDone(e) {
+      e.preventDefault();
+      if (e.target.nodeName !== 'A') { return };
+      var index = e.target.dataset.index;
+      data.splice(index, 1);
+      localStorage.setItem('listData', JSON.stringify(data));
+      updateList(data);
+    }
+  </script>
+</body>
+
+</html>
