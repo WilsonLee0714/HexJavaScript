@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="message"></div>
+
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open('get','https://raw.githubusercontent.com/WilsonLee0714/react-app/master/src/components/member/members.json',true);
+xhr.send(null);
+
+xhr.onload = function(){
+    console.log(xhr.responseText);
+    var str = JSON.parse(xhr.responseText)
+    document.querySelector('.message').textContent = str[0].name;
+}
+
+
+</script>
+</body>
+</html>
